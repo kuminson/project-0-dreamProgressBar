@@ -1,0 +1,30 @@
+@-webkit-keyframes progress-bar-stripes-o {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 40px 0;
+  }
+}
+@-o-keyframes progress-bar-stripes-o {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 40px 0;
+  }
+}
+@keyframes progress-bar-stripes-o {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 40px 0;
+  }
+}
+.progress.active .progress-bar,
+.progress-bar.active-o {
+  -webkit-animation: progress-bar-stripes-o 2s linear infinite;
+       -o-animation: progress-bar-stripes-o 2s linear infinite;
+          animation: progress-bar-stripes-o 2s linear infinite;
+}
