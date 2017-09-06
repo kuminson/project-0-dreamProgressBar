@@ -6,10 +6,21 @@
 </template>
 
 <script>
-	
+	export default{
+		name: 'footer',
+		data(){
+			return{
+				
+			}
+		},
+		mounted(){
+			// 获取模块高度
+			this.$store.commit('changeHeight',{key: 'footHeight', val:this.$el.offsetHeight});
+		}
+	}
 </script>
 
-<style>
+<style scoped>
 	.foot{
 		width: 100%;
 		background-color: #5bc0de;
@@ -18,8 +29,8 @@
 		padding-bottom: 20px;
 		color: #EEE;
 		font-size: 16px;
-		position: absolute;
-		bottom: 0;
+		/*position: absolute;*/
+		/*bottom: 0;*/
 	}
 	.link{
 		color: #518EC2;

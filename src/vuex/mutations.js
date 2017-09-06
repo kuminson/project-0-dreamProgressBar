@@ -1,6 +1,6 @@
 const motations = {
-	trymotation (state){
-		state.trynum += 50;
+	changeHeight(state,newObj){
+		state[newObj.key] = newObj.val;
 	}
 }
 

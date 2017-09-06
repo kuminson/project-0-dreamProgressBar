@@ -10,8 +10,8 @@
 				</div>
 			</div>
 			<div class="user">
-				<button type="button" class="btn btn-default btn-info">登录</button>
-				<button type="button" class="btn btn-default btn-info">注册</button>
+				<button type="button" class="user_btn btn btn-default btn-info">登录</button>
+				<button type="button" class="user_btn btn btn-default btn-info">注册</button>
 			</div>
 		</div>
 	</div>
@@ -24,6 +24,10 @@
 			return {
 
 			}
+		},
+		mounted(){
+			// 获取模块高度
+			this.$store.commit('changeHeight',{key: 'headHeight', val:this.$el.offsetHeight});
 		}
 	}
 </script>
@@ -61,6 +65,10 @@
 	}
 	.user{
 		float: right;
-		margin-top: 45px;
+		height: 80px;
+		line-height: 80px;
+	}
+	.user_btn{
+		margin-left: 10px;
 	}
 </style>
