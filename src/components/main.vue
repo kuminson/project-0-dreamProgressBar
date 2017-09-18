@@ -2,14 +2,11 @@
 	<div class="main" >
 		<div class="content" :style="mainsy">
 			<h2 class="title">小目标<span class="subtitle">small goal</span></h2>
-			<ul class="goals container">
-				<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal"><router-view name="smallGoal"></router-view></li>
-				<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal"><router-view name="smallGoal"></router-view></li>
-				<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal"><router-view name="smallGoal"></router-view></li>
-				<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal"><router-view name="smallGoal"></router-view></li>
-				<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal"><router-view name="smallGoal"></router-view></li>
-				<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal"><router-view name="smallGoal"></router-view></li>
-			</ul>
+			<transition-group name="smallGoalList" tag="ul" class="goals container">
+				<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal" v-for="sg in smallGoals" v-bind:key="sg">
+					<router-view name="smallGoal"></router-view>
+				</li>
+			</transition-group>
 		</div>
 	</div>
 </template>
@@ -19,17 +16,19 @@
 		name: 'main',
 		data () {
 			return {
-
+				smallGoals:[1,2,3]
 			}
 		},
 		computed:{
 			mainsy(){
 				let mainh = this.$store.state.bodyHeight - this.$store.state.headHeight - this.$store.state.footHeight;
-				console.log('main',this.$store.state.bodyHeight,this.$store.state.headHeight,this.$store.state.footHeight,mainh);
 				return {
 					'minHeight':  mainh + 'px'
 				}
 			}
+		},
+		methods:{
+			
 		}
 	}
 </script>
@@ -72,5 +71,15 @@
 	.goal{
 		padding-left: 0;
 		padding-right: 0;
+		display: inline-block;
+	}
+	.smallGoalList-enter-active, .smallGoalList-leave-active{
+		transition: all 1s;
+	}
+	.smallGoalList-enter, .smallGoalList-leaver-to{
+		opacity: 0;
+	}
+	.smallGoalList-move{
+		transition: transform 2s;
 	}
 </style>
