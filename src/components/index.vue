@@ -16,9 +16,6 @@ export default {
 		}
 	},
 	methods:{
-		DomResize(){
-			console.log('DOM is changed');
-		}
 	},
 	mounted(){
 		// 获取窗口高度

@@ -16,46 +16,22 @@ import footer from '../components/footer.vue'
 import smallGoal from '../components/smallGoal.vue'
 // 引入详细提交模块
 import detailSub from '../components/detailSub.vue'
+// 引入侧边栏模块
+import aside from '../components/aside.vue' 
 
 // 注册vue-router路由框架
 Vue.use(VueRouter);
 
 
-const aside = { template: '<div style="position:fixed">aside</div>'}
-
 const routes = [
 	{
 		path: '/',
-		components: {
-			index: index
-		},
-		children:[
-			{
-				path: '/',
-				components: {
-					header: header,
-					main: main,
-					footer: footer,
-					aside: aside
-				},
-				children:[
-					{
-						path: '/',
-						components: {
-							smallGoal: smallGoal,
-						}
-					}
-				]
-			}
-		]
-	},{
-		path: '/index',
 		components: {
 			index
 		},
 		children:[
 			{
-				path: '/index',
+				path: '/',
 				components: {
 					header,
 					main,
@@ -64,13 +40,13 @@ const routes = [
 				},
 				children:[
 					{
-						path: '/index',
+						path: '/',
 						components:{
 							smallGoal
 						},
 						children:[
 							{
-								path: '/index',
+								path: '/',
 								components:{
 									detailSub
 								}

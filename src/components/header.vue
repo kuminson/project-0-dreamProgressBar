@@ -11,7 +11,7 @@
 			</div>
 			<div class="user">
 				<button type="button" class="user_btn btn btn-default btn-info">登录</button>
-				<button type="button" class="user_btn btn btn-default btn-info">注册</button>
+				<button type="button" class="user_btn btn btn-default btn-info">游客</button>
 			</div>
 		</div>
 	</div>

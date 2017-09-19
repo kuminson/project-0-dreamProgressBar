@@ -1,5 +1,5 @@
 <template>
-	<ul class="detailSub container-fluid">
+	<ul class="detailSub container-fluid" :style="zIndex">
 		<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 detail_row">
 			<div class="input-group">
 			  <span class="input-group-addon" id="date">时间：</span>
@@ -31,6 +31,18 @@
 </template>
 
 <script>
+export default {
+	data(){
+		return {
+
+		}
+	},
+	computed:{
+		zIndex(){
+			return { zIndex: this.$store.state.smallGoalZIndex }
+		}
+	}
+}
 	
 </script>
 

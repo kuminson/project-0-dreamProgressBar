@@ -46,26 +46,24 @@
 		},
 		methods:{
 			turnDetailSub(){
-				// 跳转至主页
-				this.$router.push('/index');
+				// 增加公用累加器
+				this.$store.commit('addSmallGoalZI');
 				// 变换按钮
 				this.detailTag = false;
-				// 调整z轴
-				this.sgZindex.zIndex = 20;
+				// 改变z-index
+				this.sgZindex.zIndex = this.$store.state.smallGoalZIndex + 1;
 				// 显示表单
 				this.showDetailSub = true;
 			},
 			turnIndex(){
-				// 跳转至主页
-				this.$router.push('/index');
+				// 增加公用累加器
+				this.$store.commit('addSmallGoalZI');
 				// 变换按钮
 				this.detailTag = true;
+				// 改变z-index
+				this.sgZindex.zIndex = this.$store.state.smallGoalZIndex + 1;
 				// 隐藏表单
 				this.showDetailSub = false;
-				setTimeout(() => {
-					// 调整z轴
-					this.sgZindex.zIndex = 10;
-				},1000);
 			}
 		}
 	} 
