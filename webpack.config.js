@@ -4,7 +4,7 @@ var webpack = require('webpack')
 module.exports = {
   entry: './src/main.js',
   output: {
-    path: path.resolve(__dirname, '/project-0-dreamProgressBar/dist'),
+    path: path.resolve(__dirname, './dist'),
     publicPath: '/project-0-dreamProgressBar/dist/',
     filename: 'build.js'
   },
