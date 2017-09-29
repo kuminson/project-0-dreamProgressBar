@@ -1,0 +1,116 @@
+{
+	"123192391":{
+		"id": "123192391",
+		"finish": false,
+		"title": "肌肉达人",
+		"award": "3ds",
+		"smallGoal":{
+			"12391912":{
+				"id": "12391912",
+				"finish": false,
+				"title": "推墙1000次",
+				"amount": 1000,
+				"step": 30,
+				"unit": "次",
+				"action": "推墙",
+				"award": "零度可乐一瓶"
+			},
+			"01293912":{
+				"id": "01293912",
+				"finish": false,
+				"title": "推床边1000次",
+				"amount": 1000,
+				"step": 30,
+				"unit": "次",
+				"action": "推床边",
+				"award": "酸奶一盒"
+			},
+			"92139982":{
+				"id": "01293912",
+				"finish": false,
+				"title": "推床边1000次",
+				"amount": 1000,
+				"step": 30,
+				"unit": "次",
+				"action": "推床边",
+				"award": "酸奶一盒"
+			}
+		}
+	},
+	"9128371221":{
+		"id": "9128371221",
+		"finish": false,
+		"title": "肌肉达人22",
+		"award": "3ds",
+		"smallGoal": {
+			"12391912":{
+				"id": "12391912",
+				"finish": false,
+				"title": "推墙2000次",
+				"amount": 2000,
+				"step": 30,
+				"unit": "次",
+				"action": "推墙",
+				"award": "零度可乐一瓶"
+			},
+			"01293912":{
+				"id": "01293912",
+				"finish": false,
+				"title": "推床边2000次",
+				"amount": 2000,
+				"step": 30,
+				"unit": "次",
+				"action": "推床边",
+				"award": "酸奶一盒"
+			},
+			"92139982":{
+				"id": "01293912",
+				"finish": false,
+				"title": "推床边2000次",
+				"amount": 2000,
+				"step": 30,
+				"unit": "次",
+				"action": "推床边",
+				"award": "酸奶一盒"
+			}
+		}
+	},
+	"6876574567":{
+		"id": "6876574567",
+		"finish": false,
+		"title": "肌肉达人33",
+		"award": "3ds",
+		"smallGoal":{
+			"12391912":{
+				"id": "12391912",
+				"finish": false,
+				"title": "推墙3000次",
+				"amount": 3000,
+				"step": 30,
+				"unit": "次",
+				"action": "推墙",
+				"award": "零度可乐一瓶"
+			},
+			"01293912":{
+				"id": "01293912",
+				"finish": false,
+				"title": "推床边3000次",
+				"amount": 3000,
+				"step": 30,
+				"unit": "次",
+				"action": "推床边",
+				"award": "酸奶一盒"
+			},
+			"92139982":{
+				"id": "01293912",
+				"finish": false,
+				"title": "推床边3000次",
+				"amount": 3000,
+				"step": 30,
+				"unit": "次",
+				"action": "推床边",
+				"award": "酸奶一盒"
+			}
+		}
+	}
+}

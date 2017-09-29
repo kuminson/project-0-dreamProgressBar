@@ -1,13 +1,17 @@
 var path = require('path')
 var webpack = require('webpack')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/project-0-dreamProgressBar/dist/',
+    publicPath: '/dist/',
     filename: 'build.js'
   },
+  plugins: [
+    new CleanWebpackPlugin(['dist'])
+  ],
   module: {
     rules: [
       {
@@ -36,14 +40,21 @@ module.exports = {
         loader: 'style-loader!css-loader'
       },
       {
-          test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-          use: [{
-              loader: "url-loader",
-              options: {
-                  limit: 10000,
-                  name: 'fonts/[name].[hash:7].[ext]'    // 将字体放入fonts文件夹下
-              }
-          }]
+        test: /\.json$/,
+        loader: 'file-loader',
+        options: {
+          name: 'json/[name].[ext]'
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        use: [{
+            loader: "url-loader",
+            options: {
+                limit: 10000,
+                name: 'fonts/[name].[hash:7].[ext]'    // 将字体放入fonts文件夹下
+            }
+        }]
       }
     ]
   },
