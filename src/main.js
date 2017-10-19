@@ -10,6 +10,10 @@ import router from './vue-router/router.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 // 引入bootstrap自定义样式
 import './assets/css/bootstrapDefined.css'
+// 引入leancloud 远程存储系统
+import AV from './components/leancloud.js';
+// 注册leancloud
+Vue.use(AV);
 
 new Vue({
 	store,

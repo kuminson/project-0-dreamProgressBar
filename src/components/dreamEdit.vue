@@ -4,14 +4,14 @@
 		<p class="dreamAward">
 			<div class="input-group">
 			  <span class="input-group-addon" id="title">梦想</span>
-			  <input type="text" class="form-control" placeholder="输入梦想名称" aria-describedby="title" :value="nowDreamData">
+			  <input type="text" class="form-control" placeholder="输入梦想名称" aria-describedby="title" :value="nowDreamData.title">
 			</div>
 		</p>
 		<!-- 奖励 -->
 		<p class="dreamAward">
 			<div class="input-group">
 			  <span class="input-group-addon" id="award">奖励</span>
-			  <input type="text" class="form-control" placeholder="输入完成后的奖励" aria-describedby="award" >
+			  <input type="text" class="form-control" placeholder="输入完成后的奖励" aria-describedby="award" :value="nowDreamData.award">
 			</div>
 		</p>
 		<!-- 进度条 -->
@@ -36,7 +36,7 @@ export default{
 			if(this.$store.getters.nowDreamData === undefined){
 				return ;
 			}
-			return this.$store.getters.nowDreamData.title;	
+			return this.$store.getters.nowDreamData;	
 		}
 	},
 	mounted(){
@@ -52,14 +52,6 @@ export default{
 		border-radius: 4px;
 		padding: 5px;
 		color: #FFF;
-	}
-	.dream:hover{
-		background-color: #31b0d5;
-		border-color: #269abc;
-	}
-	.dream:active{
-		background-color: #269abc;
-		border-color: #1b6d85;
 	}
 	.dreamTitle{
 		font-weight: bold;

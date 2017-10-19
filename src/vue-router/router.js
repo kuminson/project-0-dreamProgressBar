@@ -28,6 +28,14 @@ import mainDreams from '../components/mainDreams.vue'
 import mainEdit from '../components/mainEdit.vue'
 // 引入梦想可编辑模块
 import dreamEdit from '../components/dreamEdit.vue'
+// 引入小目标可编辑模块
+import smallGoalEdit from '../components/smallGoalEdit.vue'
+// 引入小目标创建模块
+import smallGoalNew from '../components/smallGoalNew.vue'
+// 引入自定义提示框
+import myAlert from '../components/myAlert.vue'
+// 引入欢迎模块
+import mainWelcome from '../components/mainWelcome.vue'
 
 // 注册vue-router路由框架
 Vue.use(VueRouter);
@@ -46,24 +54,41 @@ const routes = [
 					header,
 					main,
 					footer,
-					aside
+					myAlert
 				},
 				children:[
 					{
 						path: '/',
+						components: {
+							mainWelcome
+						}
+					}
+				]
+			},{
+				path: '/home',
+				components: {
+					header,
+					main,
+					footer,
+					aside,
+					myAlert
+				},
+				children:[
+					{
+						path: '/home',
 						components: {
 							mainSmallGoals,
 							dream
 						},
 						children:[
 							{
-								path: '/',
+								path: '/home',
 								components:{
 									smallGoal
 								},
 								children:[
 									{
-										path: '/',
+										path: '/home',
 										components:{
 											detailSub
 										}
@@ -79,7 +104,8 @@ const routes = [
 					header,
 					main,
 					footer,
-					aside
+					aside,
+					myAlert
 				},
 				children:[
 					{
@@ -113,7 +139,8 @@ const routes = [
 					header,
 					main,
 					footer,
-					aside
+					aside,
+					myAlert
 				},
 				children:[
 					{
@@ -126,8 +153,9 @@ const routes = [
 							{
 								path: '/edit/:dreamId',
 								components:{
-									smallGoal,
-									dreamEdit
+									smallGoalEdit,
+									dreamEdit,
+									smallGoalNew
 								},
 								children:[
 									{

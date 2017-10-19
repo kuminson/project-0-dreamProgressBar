@@ -6,13 +6,18 @@
 			<router-view name="dreamEdit"></router-view>
 		</div>
 		<transition-group name="smallGoalList" tag="ul" class="goals container">
+			<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal" key="addsg">
+				<div class="addsg">
+					<button class="btn btn-info addsgBtn" @click="changeShowNewsg"><span class="glyphicon glyphicon-plus-sign addIcon"></span>增加新的小目标</button>
+				</div>
+			</li>
+			<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal" key="newsg" v-if="showNewsg">
+				<router-view name="smallGoalNew"></router-view>
+			</li>
 			<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal" v-for="sg in smallGoals" v-bind:key="sg">
-				<router-view name="smallGoal"></router-view>
+				<router-view name="smallGoalEdit"></router-view>
 			</li>
 		</transition-group>
-		<div class="addsg">
-			
-		</div>
 	</div>
 </template>
 
@@ -21,7 +26,8 @@
 		name: 'mainEdit',
 		data () {
 			return {
-				smallGoals:[1,2,3,4,5]
+				smallGoals:[1,2,3,4,5],
+				showNewsg: false
 			}
 		},
 		computed:{
@@ -29,6 +35,9 @@
 		},
 		methods:{
 			finishEdit(){
+			},
+			changeShowNewsg(){
+				this.showNewsg = !this.showNewsg;
 			}
 		},
 		mounted(){
@@ -70,6 +79,22 @@
 	.bgDream{
 		padding: 10px;
 	}
+	.addsg{
+		width: 100%;
+		padding: 10px;		
+	}
+	.addsgBtn{
+		width: 100%;
+		height: 160px;
+		font-size: 26px;
+		font-weight: bold;
+		letter-spacing: 5px;
+		border-radius: 10px;
+	}
+	.addIcon{
+		vertical-align: middle;
+		margin-top: -4px;
+	}
 	.goals{
 		width: 100%;
 		padding-left: 0;
@@ -86,10 +111,13 @@
 	.smallGoalList-enter-active, .smallGoalList-leave-active{
 		transition: all 1s;
 	}
-	.smallGoalList-enter, .smallGoalList-leaver-to{
+	.smallGoalList-leave-active{
+		position: absolute;
+	}
+	.smallGoalList-enter, .smallGoalList-leave-to{
 		opacity: 0;
 	}
 	.smallGoalList-move{
-		transition: transform 2s;
+		transition: transform 1s;
 	}
 </style>

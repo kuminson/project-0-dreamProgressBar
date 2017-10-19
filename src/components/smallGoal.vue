@@ -4,19 +4,19 @@
 		<div class="smallGoal" :style="sgZindex">
 			<!-- 进度条 -->
 			<div class="progress pgs">
-			  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;min-width:2em">
-			  40%
+			  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" :style="barStyle">
+			  {{ progressNum }}%
 			  </div>
 			</div>
 			<!-- 详细信息 -->
 			<ul class="infos">
-				<li>小目标：<span>背30篇英文文章</span></li>
-				<li>小进度：3/30</li>
-				<li>小步骤：<span>1</span><span>篇文章</span></li>
-				<li>小奖励：<span>榴莲一个</span></li>
+				<li>小目标：{{ smallGoalData.title }}</li>
+				<li>小进度：{{ smallGoalData.accomplish }}/{{ smallGoalData.amount }}</li>
+				<li>小步骤：{{ smallGoalData.action }}{{ smallGoalData.step }}{{ smallGoalData.unit }}</li>
+				<li>小奖励：{{ smallGoalData.award }}</li>
 			</ul>
 			<!-- 快速提交 -->
-			<button style="button" class="btn btn-primary sbm" title="快速提交完成的一个步骤"><span class="sbm_top">前&nbsp;&nbsp;进</span><br/>一&nbsp;小&nbsp;步</button>
+			<button style="button" class="btn btn-primary sbm" title="快速提交完成的一个步骤" @click="oneStep"><span class="sbm_top">前&nbsp;&nbsp;进</span><br/>一&nbsp;小&nbsp;步</button>
 			<!-- 详细提交 -->
 			<button style="button" class="btn btn-info misbm" v-if="detailTag" @click="turnDetailSub">详细提交<span class="glyphicon glyphicon-triangle-bottom icon_sub"></span></button>
 			<!-- 收起列表 -->
@@ -24,25 +24,40 @@
 		</div>
 		<!-- 表单 -->
 		<transition name="detail">
-			<router-view name="detailSub" v-if="showDetailSub"></router-view>
+			<router-view name="detailSub" v-on:showHide="changeSDS" :sgId="sgId" :dreamId="dreamId" v-if="showDetailSub"></router-view>
 		</transition>
 	</div>
 </template>
 
 <script>
 	// 引入vuex辅助函数
-	import { mapState } from 'vuex'
+	import { mapState, mapActions, mapMutations } from 'vuex'
 	export default {
 		name: 'smallGoal',
+		props: [ 'sgId', 'dreamId' ],
 		data(){
 			return {
 				detailTag: true,
 				showDetailSub: false,
-				sgZindex: {zIndex: 10}
+				sgZindex: {zIndex: 10},
 			}
 		},
 		computed:{
-			
+			smallGoalData(){
+				// 返回小目标数据
+				return this.$store.state.mainData[this.dreamId].smallGoal[this.sgId];
+			},
+			progressNum(){
+				// 返回进度百分比
+				return Math.floor(parseInt(this.smallGoalData.accomplish) / parseInt(this.smallGoalData.amount) * 100);
+			},
+			barStyle(){
+				// 进度条样式
+				return {
+					width: this.progressNum + '%',
+					minWidth: '2em'
+				}
+			}
 		},
 		methods:{
 			turnDetailSub(){
@@ -64,6 +79,55 @@
 				this.sgZindex.zIndex = this.$store.state.smallGoalZIndex + 1;
 				// 隐藏表单
 				this.showDetailSub = false;
+			},
+			...mapActions([
+				// 提交梦想数据
+				'postDreamData',
+				// 修改自定义提示框数据
+				'changeMyAlert'
+			]),
+			...mapMutations([
+				// 修改主体数据 前进一小步
+				'addOneStep',
+				// 当前日期
+				'nowDate'
+			]),
+			oneStep(){
+				// 修改当前日期格式
+				this.nowDate({data:'-'});
+				// 修改主体数据 前进一小步
+				this.addOneStep({
+					dreamId: this.dreamId,
+					sgId: this.sgId,
+					log:{
+						"date": this.$store.state.nowDate,
+						"place": "无",
+						"remark": this.smallGoalData.action + this.smallGoalData.step + this.smallGoalData.unit,
+						"award": this.smallGoalData.award
+					}
+				});
+				// 更新梦想数据
+				this.postDreamData().then(() => {
+					// 显示完成提交
+					this.changeMyAlert({
+						state: true,
+						mode: 'success',
+						title: '提交成功',
+						content: '成功完成前进一小步'
+					})
+				}).catch(()=>{
+					// 显示提交失败
+					this.changeMyAlert({
+						state: true,
+						mode: 'anger',
+						title: '提交失败',
+						content: '服务器不稳定，请稍后再试'
+					})
+				});
+			},
+			// 翻转showDetailSub
+			changeSDS(){
+				this.showDetailSub = !this.showDetailSub;
 			}
 		}
 	} 
@@ -74,6 +138,7 @@
 	.smallGoal{
 		margin: 10px;
 		padding: 10px;
+		height: 160px;
 		border: 2px solid #518EC2;
 		border-radius: 10px;
 		overflow: hidden;

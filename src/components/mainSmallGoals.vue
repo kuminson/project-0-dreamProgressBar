@@ -2,26 +2,28 @@
 	<div>
 		<h2 class="title">小目标<span class="subtitle">small goal</span></h2>
 		<transition-group name="smallGoalList" tag="ul" class="goals container">
-			<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal" v-for="sg in smallGoals" v-bind:key="sg">
-				<router-view name="smallGoal"></router-view>
+			<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal" v-for="sg in allSmallGoal" v-bind:key="sg.id">
+				<router-view name="smallGoal" :sgId="sg.id" :dreamId="sg.dreamId" ></router-view>
 			</li>
 		</transition-group>
 	</div>
 </template>
 
 <script>
+	import { mapGetters } from 'vuex';
+
 	export default {
 		name: 'mainSmallGoals',
 		data () {
 			return {
-				smallGoals:[1,2,3]
 			}
 		},
 		computed:{
-			
+			...mapGetters([
+				'allSmallGoal'	
+			])
 		},
 		methods:{
-			
 		}
 	}
 </script>

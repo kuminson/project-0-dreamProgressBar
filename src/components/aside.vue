@@ -8,7 +8,7 @@
 					<!-- 梦想列表 -->
 					<ul class="dreamList">
 						<li v-for="dream in dreams" class="dream" key="dream">
-							<a href="#" class="dreamLink">
+							<a href="/#/dream/123192391" class="dreamLink">
 								<router-view name="dream"></router-view>
 							</a>
 						</li>

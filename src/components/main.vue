@@ -4,6 +4,7 @@
 			<router-view name="mainSmallGoals"></router-view>
 			<router-view name="mainDreams"></router-view>
 			<router-view name="mainEdit"></router-view>
+			<router-view name="mainWelcome"></router-view>
 		</div>
 	</div>
 </template>

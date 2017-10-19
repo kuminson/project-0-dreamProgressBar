@@ -4,6 +4,7 @@
 	    <router-view name="main"></router-view>
 	    <router-view name="aside"></router-view>
 	    <router-view name="footer"></router-view>
+	    <router-view name="myAlert"></router-view>
 	</div>
 </template>
 

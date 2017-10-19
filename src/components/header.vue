@@ -10,24 +10,90 @@
 				</div>
 			</div>
 			<div class="user">
-				<button type="button" class="user_btn btn btn-default btn-info">登录</button>
-				<button type="button" class="user_btn btn btn-default btn-info">游客</button>
+				<div v-if="!logState" class="input-group uinput">
+					<input v-model="username" type="text" class="form-control" placeholder="用户名..." aria-describedby="username">
+				</div>
+				<div v-if="!logState" class="input-group uinput">
+					<input v-model="password" type="password" class="form-control" placeholder="密码..." aria-describedby="password">
+				</div>
+				<span v-if="logState">欢迎您&nbsp;{{$AV.User.current().get('username')}}</span>
+				<button v-if="!logState" @click="login" type="button" class="user_btn btn btn-default btn-info">登录</button>
+				<button v-if="logState" @click="logout" type="button" class="user_btn btn btn-default btn-info">注销</button>
+				<button @click="test" type="button" class="user_btn btn btn-default btn-info">测试</button>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+	import { mapActions } from 'vuex'
 	export default {
 		name: 'header',
 		data () {
 			return {
+				username: '',
+				password: '',
+				logState: !!(this.$AV.User.current())
+			}
+		},
+		beforeRouteEnter(to, from, next){
+			next(vm => {
+				// 判断登录状态
+				if(vm.logState){
+					// 登录状态 
 
+				}else{
+					// 非登录状态 跳转首页
+					vm.$router.push('/');
+				}
+			});
+		},
+		computed:{
+		},
+		methods:{
+			...mapActions([
+				// 修改自定义提示框数据
+				'changeMyAlert',
+				'getDreamData'
+			]),
+			// 登录操作
+			login(){
+				// 发送登录请求
+				this.$AV.User.logIn(this.username, this.password).then((data) => {
+					// 改变登录状态
+					this.logState = !!(this.$AV.User.current());
+					// 跳转home页面
+					this.$router.push('/home');
+					// 获取数据
+					this.getDreamData();
+				}).catch((error)=>{
+					// 报错
+					this.changeMyAlert({
+						state: true,
+						mode: 'danger',
+						title: '登录失败',
+						content: '用户名或者密码错误'
+					});
+
+				})
+			},
+			// 登出操作
+			logout(){
+				this.$AV.User.logOut();
+				// 改变登录状态
+				this.logState = !!(this.$AV.User.current());
+				// 跳转欢迎页面
+				this.$router.push('/');
+			},
+			test(){
+				this.getDreamData();
 			}
 		},
 		mounted(){
 			// 获取模块高度
 			this.$store.commit('changeHeight',{key: 'headHeight', val:this.$el.offsetHeight});
+			// 改变登录状态
+			this.logState = !!(this.$AV.User.current());
 		}
 	}
 </script>
@@ -68,7 +134,14 @@
 		height: 80px;
 		line-height: 80px;
 	}
+	.uinput{
+		/*float: left;*/
+		display: inline-block;
+		vertical-align: middle;
+		margin-left: 10px;
+	}
 	.user_btn{
+		/*float: right;*/
 		margin-left: 10px;
 	}
 </style>
