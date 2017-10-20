@@ -7,9 +7,9 @@
 					<button type="button" class="btn btn-info newDm"><span class="glyphicon glyphicon-plus-sign addIcon"></span>新梦想</button>
 					<!-- 梦想列表 -->
 					<ul class="dreamList">
-						<li v-for="dream in dreams" class="dream" key="dream">
-							<a href="/#/dream/123192391" class="dreamLink">
-								<router-view name="dream"></router-view>
+						<li v-for="dream in mainData" class="dream" :key="dream.id">
+							<a :href="'/#/dream/'+dream.id" class="dreamLink">
+								<router-view name="dream" :dreamId="dream.id"></router-view>
 							</a>
 						</li>
 					</ul>
@@ -32,6 +32,12 @@ export default{
 			asideSty: '',
 			// 显示隐藏按钮是否存在
 			shbtn: true
+		}
+	},
+	computed:{
+		// 梦想整体数据
+		mainData(){
+			return this.$store.getters.allDream;
 		}
 	},
 	methods:{
@@ -114,12 +120,13 @@ export default{
 	.dream{
 		list-style: none;
 		width: 180px;
-		margin-left: auto;
-		margin-right: auto;
+		/*margin-left: auto;*/
+		/*margin-right: auto;*/
 		border-radius: 4px;
 		margin-bottom: 10px;
 	}
 	.dreamLink{
+		margin-left: 10px;
 		text-decoration: none;
 		display: block;
 	}

@@ -1,20 +1,47 @@
 <template>
 	<div class="dream">
 		<!-- 梦想标题 -->
-		<h4 class="dreamTitle">编程大师</h4>
+		<h4 class="dreamTitle">{{dream.title}}</h4>
 		<!-- 奖励 -->
-		<p class="dreamAward">奖励：iPhoneX</p>
+		<p class="dreamAward">奖励：{{dream.award}}</p>
 		<!-- 进度条 -->
 		<div class="progress pgs">
-		  <div class="progress-bar progress-bar-primary progress-bar-striped active-o" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;min-width:2em">
-		  40%
+		  <div class="progress-bar progress-bar-primary progress-bar-striped active-o" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" :style="barStyle">
+		  {{theDreamRate}}%
 		  </div>
 		</div>
 	</div>
 </template>
 
 <script>
-	
+import { mapGetters } from 'vuex'
+
+export default{
+	name: 'dream',
+	props: [ 'dreamId' ],
+	data(){
+		return{
+		}
+	},
+	computed:{
+		// 梦想数据
+		dream(){
+			return this.$store.state.mainData[this.dreamId];
+		},
+		...mapGetters([
+			'dreamRate'
+		]),
+		theDreamRate(){
+			return this.dreamRate(this.dreamId);
+		},
+		barStyle(){
+			return {
+				width: this.theDreamRate + '%',
+				minWidth: '2em'
+			}
+		}
+	}
+}
 </script>
 
 <style scoped>

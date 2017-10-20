@@ -49,7 +49,7 @@
 			},
 			progressNum(){
 				// 返回进度百分比
-				return Math.floor(parseInt(this.smallGoalData.accomplish) / parseInt(this.smallGoalData.amount) * 100);
+				return this.$store.getters.smallGoalRate(this.dreamId, this.sgId);
 			},
 			barStyle(){
 				// 进度条样式
