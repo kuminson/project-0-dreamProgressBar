@@ -114,6 +114,10 @@ const routes = [
 							mainDreams,
 							dream
 						},
+						props:{
+							mainDreams: true,
+							dream: false
+						},
 						children:[
 							{
 								path: '/dream/:dreamId',
@@ -148,6 +152,10 @@ const routes = [
 						components: {
 							mainEdit,
 							dream
+						},
+						props:{
+							mainEdit: true,
+							dream: false
 						},
 						children:[
 							{

@@ -51,7 +51,6 @@ const actions = {
 	},
 	// 获取用户对应的数据
 	getDreamData({ state, commit }, newObj){
-		console.log(state.$AV.User.current().get('dataId'));
 		// 返回promise函数
 		return new Promise((resolve, reject) => {
 			// 声明数据表

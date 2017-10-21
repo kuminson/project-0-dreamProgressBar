@@ -12,6 +12,13 @@ export default{
 		return{
 
 		}
+	},
+	mounted(){
+		// 判断是登录状态
+		if(this.$AV.User.current()){
+			// 跳转页面
+			this.$router.push('/home');
+		}
 	}
 }
 </script>

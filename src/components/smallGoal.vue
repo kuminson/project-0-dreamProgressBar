@@ -93,6 +93,9 @@
 				'nowDate'
 			]),
 			oneStep(){
+				if(this.$store.state.mainData[this.dreamId].smallGoal[this.sgId].finish){
+					return false;
+				}
 				// 修改当前日期格式
 				this.nowDate({data:'-'});
 				// 修改主体数据 前进一小步

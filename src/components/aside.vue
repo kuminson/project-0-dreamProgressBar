@@ -27,7 +27,6 @@
 export default{
 	data(){
 		return {
-			dreams:[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
 			// 侧边栏距左侧距离
 			asideSty: '',
 			// 显示隐藏按钮是否存在

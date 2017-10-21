@@ -73,6 +73,23 @@ const getters = {
 			// 返回计算平均百分数
 			return Math.floor(sgAllRate / sgNum);
 		}
+	},
+	dreamAllsg(state){
+		return (dreamId) => {
+			// 初始化小目标
+			let smallGoal = [];
+			if(state.mainData[dreamId] == undefined){
+				return smallGoal;
+			}
+			let sgData = state.mainData[dreamId].smallGoal;
+			// 循环小目标
+			for(let sgId in sgData){
+				// 缓存小目标
+				smallGoal.push(sgData[sgId]);
+			}
+			// 返回小目标
+			return smallGoal;
+		}
 	}
 }
 

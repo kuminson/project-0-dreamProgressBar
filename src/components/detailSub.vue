@@ -67,6 +67,9 @@ export default {
 			'changeMyAlert'
 		]),
 		submit(){
+			if(this.$store.state.mainData[this.dreamId].smallGoal[this.sgId].finish){
+				return false;
+			}
 			// 修改主体数据 前进一小步
 			this.addOneStep({
 				dreamId: this.dreamId,

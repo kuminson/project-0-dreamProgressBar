@@ -8,6 +8,46 @@ const state = {
 	smallGoalZIndex: 10,
 	// 总体数据
 	mainData: {},
+	// 空载梦想数据
+	noloadDreamData:{
+		"000000":{
+			"id": "000000",
+			"finish": false,
+			"title": "梦想标题",
+			"award": "梦想奖励",
+			"smallGoal":{
+				"000":{
+					"id": "000",
+					"dreamId": "000000",
+					"finish": false,
+					"title": "小目标标题",
+					"amount": 1000,
+					"step": 10,
+					"accomplish": 0,
+					"unit": "单位",
+					"action": "动作",
+					"award": "小目标奖励",
+					"log":[]
+				}
+			}
+		}
+	},
+	// 空载小目标数据
+	noloadSGData:{
+		"000":{
+			"id": "000",
+			"dreamId": "000000",
+			"finish": false,
+			"title": "小目标标题",
+			"amount": 1000,
+			"step": 10,
+			"accomplish": 0,
+			"unit": "单位",
+			"action": "动作",
+			"award": "小目标奖励",
+			"log":[]
+		}
+	},
 	// 当前梦想ID
 	nowDreamId: 0,
 	// 自定义提示框

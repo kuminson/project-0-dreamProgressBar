@@ -3,11 +3,11 @@
 		<h2 class="title">大梦想<span class="subtitle">big dream</span></h2>
 		<button class="edit btn btn-default btn-info" @click="toEdit">调整目标</button>
 		<div class="bgDream">
-			<router-view name="dream"></router-view>
+			<router-view v-if="mainDataExist" name="dream" :dreamId="dreamId"></router-view>
 		</div>
 		<transition-group name="smallGoalList" tag="ul" class="goals container">
-			<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal" v-for="sg in smallGoals" v-bind:key="sg">
-				<router-view name="smallGoal"></router-view>
+			<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal" v-for="sg in smallGoals" v-bind:key="sg.id">
+				<router-view name="smallGoal" :sgId="sg.id" :dreamId="sg.dreamId"></router-view>
 			</li>
 		</transition-group>
 		<div class="addsg">
@@ -21,27 +21,40 @@
 		name: 'mainDreams',
 		data () {
 			return {
-				smallGoals:[1,2,3,4,5]
 			}
 		},
+		props:['dreamId'],
 		computed:{
-			
+			// dreamId(){
+			// 	return this.$store.state.nowDreamId
+			// },
+			mainDataExist(){
+				return !!(this.$store.state.mainData[this.dreamId])
+			},
+			smallGoals(){
+				return this.$store.getters.dreamAllsg(this.dreamId);
+			}
 		},
 		methods:{
 			toEdit(){
 				// 获取梦想id值
 				let nowDreamId = this.$store.state.nowDreamId;
 				// 跳转页面
-				this.$router.push("/edit/"+nowDreamId);
+				this.$router.push("/edit/"+this.dreamId);
 			}
 		},
 		mounted(){
-			// 缓存当前梦想ID
-			this.$store.commit({
-				type: 'changeNowDreamId',
-				data: this.$route.params.dreamId
-			});
-		}
+			
+		},
+		// beforeRouteEnter(to, from, next){
+		// 	next(vm => {
+		// 		// 缓存当前梦想ID
+		// 		vm.$store.commit({
+		// 			type: 'changeNowDreamId',
+		// 			data: vm.$route.params.dreamId
+		// 		});
+		// 	});
+		// }
 	}
 </script>
 
