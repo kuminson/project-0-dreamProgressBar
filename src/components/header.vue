@@ -19,14 +19,13 @@
 				<span v-if="logState">欢迎您&nbsp;{{$AV.User.current().get('username')}}</span>
 				<button v-if="!logState" @click="login" type="button" class="user_btn btn btn-default btn-info">登录</button>
 				<button v-if="logState" @click="logout" type="button" class="user_btn btn btn-default btn-info">注销</button>
-				<button @click="test" type="button" class="user_btn btn btn-default btn-info">测试</button>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	import { mapActions } from 'vuex'
+	import { mapState, mapActions, mapMutations } from 'vuex'
 	export default {
 		name: 'header',
 		data () {
@@ -55,6 +54,11 @@
 				// 修改自定义提示框数据
 				'changeMyAlert',
 				'getDreamData'
+				
+			]),
+			...mapMutations([
+				// 清除缓存
+				'clearMainData'
 			]),
 			// 登录操作
 			login(){
@@ -82,11 +86,10 @@
 				this.$AV.User.logOut();
 				// 改变登录状态
 				this.logState = !!(this.$AV.User.current());
+				// 清除缓存
+				this.clearMainData();
 				// 跳转欢迎页面
 				this.$router.push('/');
-			},
-			test(){
-				this.getDreamData();
 			}
 		},
 		mounted(){

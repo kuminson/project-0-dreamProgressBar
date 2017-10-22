@@ -55,13 +55,43 @@ const motations = {
 	},
 	// 新建小目标
 	createSmallGoal(state, newObj){
-		state.mainData[newObj.dreamId].smallGoal[newObj.sgId] = newObj.sgData;
+		// 复制整体数据
+		let newMainData = JSON.parse(JSON.stringify(state.mainData));
+		// 增加小目标
+		newMainData[newObj.dreamId].smallGoal[newObj.sgId] = newObj.sgData;
+		// 赋值给整体数据
+		state.mainData = newMainData;
+	},
+	// 新建梦想
+	createDream(state, newObj){
+		// 复制整体数据
+		let newMainData = JSON.parse(JSON.stringify(state.mainData));
+		// 增加梦想
+		newMainData[newObj.dreamId] = newObj.dreamData;
+		// 赋值给整体数据
+		state.mainData = newMainData;
 	},
 	// 删除小目标
 	deleteSmallGoal(state, newObj){
-		console.log('删除前',state.mainData[newObj.dreamId].smallGoal[newObj.sgId]);
-		delete state.mainData[newObj.dreamId].smallGoal[newObj.sgId];
-		console.log('删除后',state.mainData[newObj.dreamId].smallGoal[newObj.sgId]);
+		// 复制整体数据
+		let newMainData = JSON.parse(JSON.stringify(state.mainData));
+		// 删除数据
+		delete newMainData[newObj.dreamId].smallGoal[newObj.sgId];
+		// 赋值整体数据
+		state.mainData = newMainData;
+	},
+	// 删除梦想
+	deleteDream(state, newObj){
+		// 复制整体数据
+		let newMainData = JSON.parse(JSON.stringify(state.mainData));
+		// 删除数据
+		delete newMainData[newObj.dreamId];
+		// 赋值整体数据
+		state.mainData = newMainData;
+	},
+	// 清除缓存
+	clearMainData(state){
+		state.mainData = {};
 	}
 }
 

@@ -66,6 +66,6 @@
 		opacity: 0;
 	}
 	.smallGoalList-move{
-		transition: transform 2s;
+		transition: transform 1s;
 	}
 </style>

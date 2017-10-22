@@ -16,14 +16,15 @@
 		</p>
 		<!-- 进度条 -->
 		<div class="progress pgs">
-		  <div class="progress-bar progress-bar-primary progress-bar-striped active-o" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;min-width:2em">
-		  40%
+		  <div class="progress-bar progress-bar-primary progress-bar-striped active-o" role="progressbar" :style="barStyle">
+		  {{theDreamRate}}%
 		  </div>
 		</div>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default{
 	name: "dreamEdit",
 	data(){
@@ -57,6 +58,18 @@ export default{
 					key: 'award',
 					val: val
 				});
+			}
+		},
+		...mapGetters([
+			'dreamRate'
+		]),
+		theDreamRate(){
+			return this.dreamRate(this.dreamId);
+		},
+		barStyle(){
+			return {
+				width: this.theDreamRate + '%',
+				minWidth: '2em'
 			}
 		}
 	},

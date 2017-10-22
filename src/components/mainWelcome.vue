@@ -2,6 +2,8 @@
 	<div class="mainWelcome">
 		<h2 class="title">欢迎来到梦想进度条系统</h2>
 		<p class="content">请先登录，以便享受梦想一点点实现的喜悦</p>
+		<!-- <p class="log">如果没有账号，可以使用测试账号体验下功能</p> -->
+		<!-- <p class="log">用户名：admin，密码：1</p> -->
 	</div>
 </template>
 
@@ -41,6 +43,12 @@ export default{
 		text-align: center;
 		font-size: 3em;
 		font-weight: bold;
+		color: #518EC2;
+	}
+	.log{
+		margin-top: 50px;
+		text-align: center;
+		font-size: 2em;
 		color: #518EC2;
 	}
 </style>

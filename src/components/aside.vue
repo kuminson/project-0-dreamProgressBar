@@ -4,7 +4,7 @@
 			<div class="asidecnt">
 				<div class="dreambox">
 					<!-- 增加梦想按钮 -->
-					<button type="button" class="btn btn-info newDm"><span class="glyphicon glyphicon-plus-sign addIcon"></span>新梦想</button>
+					<button type="button" class="btn btn-info newDm" @click="newDream"><span class="glyphicon glyphicon-plus-sign addIcon"></span>新梦想</button>
 					<!-- 梦想列表 -->
 					<ul class="dreamList">
 						<li v-for="dream in mainData" class="dream" :key="dream.id">
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapMutations } from 'vuex'
 export default{
 	data(){
 		return {
@@ -40,6 +41,10 @@ export default{
 		}
 	},
 	methods:{
+		...mapMutations([
+			// 新建梦想
+			'createDream'
+		]),
 		showAside(){
 			// 显示侧边栏
 			this.asideSty = 'showAside';
@@ -51,6 +56,23 @@ export default{
 			this.asideSty = '';
 			// 换成显示按钮
 			this.shbtn = true;
+		},
+		newDream(){
+			let nowDate = new Date;
+			let stamp = nowDate.getTime();
+			// 新建梦想数据
+			this.createDream({
+				dreamId: stamp,
+				dreamData: {
+					id: stamp,
+					finish: false,
+					title: "",
+					award: "",
+					smallGoal: {}
+				}
+			})
+			// 跳转梦想编辑页面
+			this.$router.push('/edit/'+ stamp);
 		}
 	}
 }

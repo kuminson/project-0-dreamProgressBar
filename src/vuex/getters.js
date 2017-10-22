@@ -70,8 +70,13 @@ const getters = {
 				sgAllRate += getters.smallGoalRate(dreamId, sgId);
 				sgNum++;
 			}
+			// 排除没有小目标
+			let dRate = Math.floor(sgAllRate / sgNum);
+			if(isNaN(dRate)){
+				return 0;
+			}
 			// 返回计算平均百分数
-			return Math.floor(sgAllRate / sgNum);
+			return dRate;
 		}
 	},
 	dreamAllsg(state){

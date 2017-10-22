@@ -60,6 +60,9 @@
 				'deleteSmallGoal'
 			]),
 			del(){
+				if(!confirm("确定要删除小目标？")){
+					return false;
+				}
 				// 删除数据
 				this.deleteSmallGoal({
 					dreamId: this.dreamId,

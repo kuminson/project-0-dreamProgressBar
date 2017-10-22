@@ -6,7 +6,7 @@
 		<p class="dreamAward">奖励：{{dream.award}}</p>
 		<!-- 进度条 -->
 		<div class="progress pgs">
-		  <div class="progress-bar progress-bar-primary progress-bar-striped active-o" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" :style="barStyle">
+		  <div class="progress-bar progress-bar-primary progress-bar-striped active-o" role="progressbar" :style="barStyle">
 		  {{theDreamRate}}%
 		  </div>
 		</div>

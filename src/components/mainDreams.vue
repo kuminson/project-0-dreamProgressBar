@@ -46,15 +46,15 @@
 		mounted(){
 			
 		},
-		// beforeRouteEnter(to, from, next){
-		// 	next(vm => {
-		// 		// 缓存当前梦想ID
-		// 		vm.$store.commit({
-		// 			type: 'changeNowDreamId',
-		// 			data: vm.$route.params.dreamId
-		// 		});
-		// 	});
-		// }
+		beforeRouteEnter (to, from, next) {
+			next(vm => {
+				// 如果梦想不存在
+				if(!vm.mainDataExist){
+					// 跳转回主页
+					vm.$router.push('/home');
+				}
+			})
+		}
 	}
 </script>
 
@@ -101,12 +101,17 @@
 		display: inline-block;
 	}
 	.smallGoalList-enter-active, .smallGoalList-leave-active{
-		transition: all 1s;
+		transition: all 0.3s;
+	}
+	.smallGoalList-leave-active{
+		position: absolute;
+		right: 0;
+		bottom: 0;
 	}
 	.smallGoalList-enter, .smallGoalList-leaver-to{
 		opacity: 0;
 	}
 	.smallGoalList-move{
-		transition: transform 2s;
+		transition: transform .5s;
 	}
 </style>
