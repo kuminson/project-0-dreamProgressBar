@@ -7,10 +7,8 @@
 					<button type="button" class="btn btn-info newDm" @click="newDream"><span class="glyphicon glyphicon-plus-sign addIcon"></span>新梦想</button>
 					<!-- 梦想列表 -->
 					<ul class="dreamList">
-						<li v-for="dream in mainData" class="dream" :key="dream.id">
-							<a :href="'/#/dream/'+dream.id" class="dreamLink">
-								<router-view name="dream" :dreamId="dream.id"></router-view>
-							</a>
+						<li v-for="dream in mainData" class="dream" :key="dream.id" @click="toDream(dream.id)">
+							<router-view name="dream" :dreamId="dream.id"></router-view>
 						</li>
 					</ul>
 				</div>
@@ -73,6 +71,9 @@ export default{
 			})
 			// 跳转梦想编辑页面
 			this.$router.push('/edit/'+ stamp);
+		},
+		toDream(dreamId){
+			this.$router.push('/dream/'+dreamId);
 		}
 	}
 }
@@ -133,7 +134,7 @@ export default{
 		margin-top: -4px;
 	}
 	.dreamList{
-		padding-left: 0;
+		padding-left: 10px;
 		margin: 0;
 		overflow-y: auto;
 		overflow-x: hidden;
@@ -145,6 +146,7 @@ export default{
 		/*margin-right: auto;*/
 		border-radius: 4px;
 		margin-bottom: 10px;
+		cursor: pointer;
 	}
 	.dreamLink{
 		margin-left: 10px;
