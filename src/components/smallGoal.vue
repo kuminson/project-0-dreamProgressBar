@@ -122,7 +122,7 @@
 					// 显示提交失败
 					this.changeMyAlert({
 						state: true,
-						mode: 'anger',
+						mode: 'danger',
 						title: '提交失败',
 						content: '服务器不稳定，请稍后再试'
 					})

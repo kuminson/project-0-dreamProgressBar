@@ -3,7 +3,7 @@
 		<h2 class="title">调整梦想<span class="subtitle">big dream</span></h2>
 		<button class="edit btn btn-default btn-info" @click="finishEdit">完成调整</button>
 		<div class="bgDream">
-			<router-view name="dreamEdit"></router-view>
+			<router-view v-if="mainDataExist" name="dreamEdit" :dreamId="dreamId"></router-view>
 		</div>
 		<transition-group name="smallGoalList" tag="ul" class="goals container">
 			<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal" key="addsg">
@@ -12,40 +12,73 @@
 				</div>
 			</li>
 			<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal" key="newsg" v-if="showNewsg">
-				<router-view name="smallGoalNew"></router-view>
+				<router-view :dreamId="dreamId" name="smallGoalNew"></router-view>
 			</li>
-			<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal" v-for="sg in smallGoals" v-bind:key="sg">
-				<router-view name="smallGoalEdit"></router-view>
+			<li class="col-xs-12 col-sm-12 col-md-6 col-lg-6 goal" v-for="sg in smallGoals" v-bind:key="sg.id">
+				<router-view v-if="mainDataExist" name="smallGoalEdit" :sgId="sg.id" :dreamId="sg.dreamId"></router-view>
 			</li>
 		</transition-group>
 	</div>
 </template>
 
 <script>
+	// 引入vuex辅助函数
+	import { mapActions, mapMutations } from 'vuex'
 	export default {
 		name: 'mainEdit',
+		props:['dreamId'],
 		data () {
 			return {
-				smallGoals:[1,2,3,4,5],
-				showNewsg: false
+				showNewsg: false,
 			}
 		},
 		computed:{
-			
+			mainDataExist(){
+				return !!(this.$store.state.mainData[this.dreamId])
+			},
+			smallGoals(){
+				return this.$store.getters.dreamAllsg(this.dreamId);
+			}
 		},
 		methods:{
+			...mapActions([
+				// 提交梦想数据
+				'postDreamData',
+				// 修改自定义提示框数据
+				'changeMyAlert'
+			]),
+			...mapMutations([
+				// 改变梦想标题和奖励
+				'changeDreamData'
+			]),
 			finishEdit(){
+				// 提交数据
+				this.postDreamData().then(() => {
+					// 显示完成提交
+					this.changeMyAlert({
+						state: true,
+						mode: 'success',
+						title: '提交成功',
+						content: '成功完成前进一小步'
+					});
+					// 跳转回梦想页面
+					this.$router.push('/dream/' + this.dreamId);
+				}).catch(()=>{
+					// 显示提交失败
+					this.changeMyAlert({
+						state: true,
+						mode: 'anger',
+						title: '提交失败',
+						content: '服务器不稳定，请稍后再试'
+					})
+				});
+
 			},
 			changeShowNewsg(){
 				this.showNewsg = !this.showNewsg;
 			}
 		},
 		mounted(){
-			// 缓存当前梦想ID
-			this.$store.commit({
-				type: 'changeNowDreamId',
-				data: this.$route.params.dreamId
-			});
 		}
 	}
 </script>

@@ -4,14 +4,14 @@
 		<p class="dreamAward">
 			<div class="input-group">
 			  <span class="input-group-addon" id="title">梦想</span>
-			  <input type="text" class="form-control" placeholder="输入梦想名称" aria-describedby="title" :value="nowDreamData.title">
+			  <input type="text" class="form-control" placeholder="输入梦想名称" aria-describedby="title" v-model="nowDreamTitle">
 			</div>
 		</p>
 		<!-- 奖励 -->
 		<p class="dreamAward">
 			<div class="input-group">
 			  <span class="input-group-addon" id="award">奖励</span>
-			  <input type="text" class="form-control" placeholder="输入完成后的奖励" aria-describedby="award" :value="nowDreamData.award">
+			  <input type="text" class="form-control" placeholder="输入完成后的奖励" aria-describedby="award" v-model="nowDreamAward">
 			</div>
 		</p>
 		<!-- 进度条 -->
@@ -28,19 +28,39 @@ export default{
 	name: "dreamEdit",
 	data(){
 		return{
-
 		}
 	},
+	props:['dreamId'],
 	computed:{
 		nowDreamData(){
-			if(this.$store.getters.nowDreamData === undefined){
-				return ;
+			return this.$store.state.mainData[this.dreamId];	
+		},
+		nowDreamTitle:{
+			get(){
+				return this.$store.state.mainData[this.dreamId].title;
+			},
+			set( val ){
+				this.$store.commit('changeDreamData',{
+					dreamId: this.dreamId,
+					key: 'title',
+					val: val
+				});
 			}
-			return this.$store.getters.nowDreamData;	
+		},
+		nowDreamAward:{
+			get(){
+				return this.$store.state.mainData[this.dreamId].award;
+			},
+			set( val ){
+				this.$store.commit('changeDreamData',{
+					dreamId: this.dreamId,
+					key: 'award',
+					val: val
+				});
+			}
 		}
 	},
 	mounted(){
-		console.log(this.$store.state.mainData);
 	}
 }
 </script>

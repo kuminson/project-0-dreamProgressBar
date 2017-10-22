@@ -48,6 +48,20 @@ const motations = {
 	// 注入leancloud到vuex里
 	initLeancloud(state, newObj){
 		state.$AV = newObj;
+	},
+	// 改变梦想标题和奖励
+	changeDreamData(state, newObj){
+		state.mainData[newObj.dreamId][newObj.key] = newObj.val;
+	},
+	// 新建小目标
+	createSmallGoal(state, newObj){
+		state.mainData[newObj.dreamId].smallGoal[newObj.sgId] = newObj.sgData;
+	},
+	// 删除小目标
+	deleteSmallGoal(state, newObj){
+		console.log('删除前',state.mainData[newObj.dreamId].smallGoal[newObj.sgId]);
+		delete state.mainData[newObj.dreamId].smallGoal[newObj.sgId];
+		console.log('删除后',state.mainData[newObj.dreamId].smallGoal[newObj.sgId]);
 	}
 }
 

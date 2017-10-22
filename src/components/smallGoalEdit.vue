@@ -1,38 +1,91 @@
 <template>
 	<div>
 		<!-- 内容 -->
-		<div class="smallGoalEdit" :style="sgZindex">
+		<div class="smallGoalEdit">
 			<!-- 进度条 -->
 			<div class="progress pgs">
-			  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;min-width:2em">
-			  40%
+			  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" :style="barStyle">
+			  {{ progressNum }}%
 			  </div>
 			</div>
 			<!-- 详细信息 -->
 			<ul class="infos">
-				<li>小目标：<span>背30篇英文文章</span></li>
-				<li>小进度：3/30</li>
-				<li>小步骤：<span>1</span><span>篇文章</span></li>
-				<li>小奖励：<span>榴莲一个</span></li>
+				<li>小目标：{{ smallGoalData.title }}</li>
+				<li>小进度：{{ smallGoalData.accomplish }}/{{ smallGoalData.amount }}</li>
+				<li>小步骤：{{ smallGoalData.action }}{{ smallGoalData.step }}{{ smallGoalData.unit }}</li>
+				<li>小奖励：{{ smallGoalData.award }}</li>
 			</ul>
 			<!-- 快速提交 -->
-			<button style="button" class="btn btn-warning sbm" title="删除当前小目标"><span class="sbm_top">删&nbsp;&nbsp;除</span><br/>小&nbsp;目&nbsp;标</button>
+			<button style="button" class="btn btn-warning sbm" title="删除当前小目标" @click="del"><span class="sbm_top">删&nbsp;&nbsp;除</span><br/>小&nbsp;目&nbsp;标</button>
 		</div>
 	</div>
 </template>
 
 <script>
 	// 引入vuex辅助函数
+	import { mapState, mapActions, mapMutations } from 'vuex'
 	export default {
 		name: 'smallGoalEdit',
+		props: [ 'sgId', 'dreamId' ],
 		data(){
 			return {
 			}
 		},
 		computed:{
-			
+			smallGoalData(){
+				// 返回小目标数据
+				return this.$store.state.mainData[this.dreamId].smallGoal[this.sgId];
+			},
+			progressNum(){
+				// 返回进度百分比
+				return this.$store.getters.smallGoalRate(this.dreamId, this.sgId);
+			},
+			barStyle(){
+				// 进度条样式
+				return {
+					width: this.progressNum + '%',
+					minWidth: '2em'
+				}
+			}
 		},
 		methods:{
+			...mapActions([
+				// 提交梦想数据
+				'postDreamData',
+				// 修改自定义提示框数据
+				'changeMyAlert'
+			]),
+			...mapMutations([
+				// 删除小目标
+				'deleteSmallGoal'
+			]),
+			del(){
+				// 删除数据
+				this.deleteSmallGoal({
+					dreamId: this.dreamId,
+					sgId: this.sgId
+				})
+				// 提交数据
+				console.log("数据删除");
+				// 更新梦想数据
+				this.postDreamData().then(() => {
+					// 显示完成提交
+					this.changeMyAlert({
+						state: true,
+						mode: 'success',
+						title: '删除成功',
+						content: '成功删除了一个小目标'
+					})
+				}).catch(()=>{
+					// 显示提交失败
+					this.changeMyAlert({
+						state: true,
+						mode: 'danger',
+						title: '提交失败',
+						content: '服务器不稳定，请稍后再试'
+					})
+				});
+			}
 		}
 	} 
 	
