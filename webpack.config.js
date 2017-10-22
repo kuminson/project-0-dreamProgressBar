@@ -6,7 +6,8 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: 'project-0-dreamProgressBar/dist/',
+    // publicPath: '/dist/',
     filename: 'build.js'
   },
   plugins: [
