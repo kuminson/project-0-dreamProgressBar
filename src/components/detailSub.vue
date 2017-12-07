@@ -130,7 +130,7 @@ export default {
 		border-radius: 0 0 10px 10px;
 		position: absolute;
 		z-index: 15;
-		left: 40px;
+		left: 5%;
 	}
 	.sub{
 		width: 100%;

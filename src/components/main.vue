@@ -40,4 +40,9 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
+	@media screen and (max-width: 992px) {
+		.content{
+			width: 100%;
+		}
+	}
 </style>

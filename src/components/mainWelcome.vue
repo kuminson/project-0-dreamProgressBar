@@ -34,14 +34,14 @@ export default{
 		margin-top: 0;
 		padding-top: 50px;
 		text-align: center;
-		font-size: 4em;
+		font-size: 2em;
 		font-weight: bold;
 		color: #337AB7;
 	}
 	.content{
 		margin-top: 100px;
 		text-align: center;
-		font-size: 3em;
+		font-size: 2em;
 		font-weight: bold;
 		color: #518EC2;
 	}

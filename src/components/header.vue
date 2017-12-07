@@ -1,7 +1,7 @@
 <template>
 	<div class="head">
 		<div class="content">
-			<div class="logo">
+			<div class="logo" @click="goHome">
 				<span class="title"><span class="firstletter">D</span>ream<span class="firstletter">P</span>rogress<span class="firstletter">B</span>ar
 				</span>
 				<div class="progress logo_pro">
@@ -90,6 +90,10 @@
 				this.clearMainData();
 				// 跳转欢迎页面
 				this.$router.push('/');
+			},
+			// 返回home页
+			goHome(){
+				this.$router.push('/home');
 			}
 		},
 		mounted(){
@@ -116,6 +120,7 @@
 	}
 	.logo{
 		float: left;
+		cursor: pointer;
 	}
 	.title{
 		font-size: 30px;
@@ -134,17 +139,30 @@
 	}
 	.user{
 		float: right;
-		height: 80px;
-		line-height: 80px;
+		text-align: right;
+		/*height: 80px;*/
+		/*line-height: 80px;*/
 	}
 	.uinput{
 		/*float: left;*/
-		display: inline-block;
+		display: block;
+		margin-bottom: 10px;
 		vertical-align: middle;
+		overflow: hidden;
 		margin-left: 10px;
 	}
 	.user_btn{
 		/*float: right;*/
 		margin-left: 10px;
+	}
+	@media screen and (min-width: 625px){
+		.user{
+			float: right;
+			height: 80px;
+			line-height: 80px;
+		}	
+		.uinput{
+			display: inline-block;
+		}
 	}
 </style>
